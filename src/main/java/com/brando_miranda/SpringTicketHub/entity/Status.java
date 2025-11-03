@@ -1,4 +1,4 @@
-package entity;
+package com.brando_miranda.SpringTicketHub.entity;
 
 public enum Status {
 

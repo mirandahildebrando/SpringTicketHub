@@ -1,4 +1,4 @@
-package entity;
+package com.brando_miranda.SpringTicketHub.entity;
 
 import java.util.UUID;
 
@@ -6,7 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Ticket {
 
     @Id
-    GeneratedValue(strategy = GenerationType.IDENTITY
+    @jakarta.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
     private UUID uniqueCode;
@@ -69,4 +69,6 @@ public class Ticket {
         this.event = event;
     }
 
+    public void setId(Long id) {
+    }
 }
