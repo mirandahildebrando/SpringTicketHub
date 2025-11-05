@@ -1,22 +1,39 @@
 package service;
 
 import com.brando_miranda.SpringTicketHub.entity.Event;
+import com.brando_miranda.SpringTicketHub.entity.Ticket;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.EventRepository;
+import repository.TicketRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final TicketRepository ticketRepository;
 
-    public EventService(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository, TicketRepository ticketRepository) {
         this.eventRepository = eventRepository;
+        this.ticketRepository = ticketRepository;
     }
 
-    public Event create(Event event) {
-        return eventRepository.save(event);
+    @Transactional
+    public Event createEvent(Event event) {
+        Event savedEvent = eventRepository.save(event);
+
+
+        for (int i = 0; i < event.getAvaliableQuantity(); i++) {
+            UUID codigo = UUID.randomUUID();
+
+            Ticket ticket = new Ticket(codigo, null, savedEvent);
+
+            ticketRepository.save(ticket);
+        }
+        return savedEvent;
     }
 
     public List<Event> findAll() {

@@ -35,8 +35,9 @@ public class Event {
         this.date = date;
         this.avaliableQuantity = avaliableQuantity;
         this.price = price;
-        this.tickets = tickets;
+
     }
+
 
     public Long getId() {
         return id;
@@ -72,6 +73,11 @@ public class Event {
     public void setId(Long id2) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+        ticket.setEvent(this);
     }
 
     

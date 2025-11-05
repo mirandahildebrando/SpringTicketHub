@@ -39,6 +39,8 @@ public class Ticket {
         this.event = event;
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -79,4 +81,15 @@ public class Ticket {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void sell(String buyerName) {
+        if (this.status == Status.avaliable) {
+            this.status = Status.sold;
+            this.buyerName = buyerName;
+        } else {
+            throw new RuntimeException ("Este ingresso não está disponível para venda.");
+        }
+    }
+
+
 }
