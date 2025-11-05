@@ -32,6 +32,13 @@ public class Ticket {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
+    public Ticket(UUID uniqueCode, String buyerName, Status status, Event event) {
+        this.uniqueCode = uniqueCode;
+        this.buyerName = buyerName;
+        this.status = Status.avaliable;
+        this.event = event;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,5 +77,6 @@ public class Ticket {
     }
 
     public void setId(Long id) {
+        this.id = id;
     }
 }

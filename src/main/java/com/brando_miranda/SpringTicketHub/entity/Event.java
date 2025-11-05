@@ -30,6 +30,13 @@ public class Event {
     @OneToMany
     private List<Ticket> tickets = new ArrayList<>();
 
+    public Event(String name, LocalDateTime date, Integer avaliableQuantity, BigDecimal price, List<Ticket> tickets) {
+        this.name = name;
+        this.date = date;
+        this.avaliableQuantity = avaliableQuantity;
+        this.price = price;
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;
