@@ -1,16 +1,17 @@
-package controller;
+package com.brando_miranda.SpringTicketHub.controller;
+
 
 import com.brando_miranda.SpringTicketHub.entity.Event;
-import jakarta.persistence.Id;
+import com.brando_miranda.SpringTicketHub.service.EventService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.EventService;
+
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/events")
 public class EventController {
 
     private final EventService eventService;

@@ -1,12 +1,16 @@
-package service;
+package com.brando_miranda.SpringTicketHub.service;
 
 
 import com.brando_miranda.SpringTicketHub.entity.Event;
+import com.brando_miranda.SpringTicketHub.entity.Status;
 import com.brando_miranda.SpringTicketHub.entity.Ticket;
+import com.brando_miranda.SpringTicketHub.repository.TicketRepository;
 import org.springframework.stereotype.Service;
-import repository.TicketRepository;
+
+
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TicketService {
@@ -16,6 +20,8 @@ public class TicketService {
     public TicketService (TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
+
+
 
     public Ticket create(Ticket ticket) {
         return ticketRepository.save(ticket);
@@ -34,7 +40,6 @@ public class TicketService {
         if(!ticketRepository.existsById(id)) {
             throw new RuntimeException("Ticket not found");
         }
-        ticket.setId(id);
         return ticketRepository.save(ticket);
     }
 

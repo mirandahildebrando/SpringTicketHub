@@ -21,24 +21,30 @@ public class Ticket {
     @Id
     @jakarta.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true, nullable = false)
+
+    @Column(unique = true)
     private UUID uniqueCode;
+
     private String buyerName;
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id")
     private Event event;
 
     public Ticket(UUID uniqueCode, String buyerName, Status status, Event event) {
         this.uniqueCode = uniqueCode;
         this.buyerName = buyerName;
-        this.status = Status.avaliable;
+        this.status = status;
         this.event = event;
     }
 
+
+    public Ticket(UUID codigo, Object o, Event savedEvent) {
+    }
 
 
     public Long getId() {
@@ -78,9 +84,6 @@ public class Ticket {
         this.event = event;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void sell(String buyerName) {
         if (this.status == Status.avaliable) {

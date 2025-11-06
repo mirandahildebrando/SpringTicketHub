@@ -1,4 +1,4 @@
-package repository;
+package com.brando_miranda.SpringTicketHub.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

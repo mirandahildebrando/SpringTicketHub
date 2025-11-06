@@ -1,11 +1,13 @@
-package service;
+package com.brando_miranda.SpringTicketHub.service;
 
 import com.brando_miranda.SpringTicketHub.entity.Event;
+import com.brando_miranda.SpringTicketHub.entity.Status;
 import com.brando_miranda.SpringTicketHub.entity.Ticket;
+import com.brando_miranda.SpringTicketHub.repository.EventRepository;
+import com.brando_miranda.SpringTicketHub.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repository.EventRepository;
-import repository.TicketRepository;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -22,19 +24,18 @@ public class EventService {
     }
 
     @Transactional
-    public Event createEvent(Event event) {
+    public Event create(Event event) {
         Event savedEvent = eventRepository.save(event);
-
 
         for (int i = 0; i < event.getAvaliableQuantity(); i++) {
             UUID codigo = UUID.randomUUID();
-
-            Ticket ticket = new Ticket(codigo, null, savedEvent);
-
+            Ticket ticket = new Ticket(codigo, event.getName(), Status.avaliable, savedEvent);
             ticketRepository.save(ticket);
         }
+
         return savedEvent;
     }
+
 
     public List<Event> findAll() {
         return eventRepository.findAll();
@@ -49,8 +50,7 @@ public class EventService {
         if (!eventRepository.existsById(id)) {
             throw new RuntimeException("Event not found");
         }
-        event.setId(id);
-        return eventRepository.save(event);
+         return eventRepository.save(event);
     }
 
     public void delete(Long id) {

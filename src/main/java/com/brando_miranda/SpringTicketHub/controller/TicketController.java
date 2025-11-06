@@ -1,18 +1,22 @@
-package controller;
+package com.brando_miranda.SpringTicketHub.controller;
+
 
 import com.brando_miranda.SpringTicketHub.entity.Ticket;
+import com.brando_miranda.SpringTicketHub.service.TicketService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.TicketService;
+
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/tickets")
 public class TicketController {
 
     private final TicketService ticketService;
+
 
 
     public TicketController(TicketService ticketService) {
@@ -22,7 +26,7 @@ public class TicketController {
     @PostMapping
     public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
         Ticket saved = ticketService.create(ticket);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ticket);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @GetMapping
@@ -48,7 +52,7 @@ public class TicketController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         ticketService.delete(id);
-        return ResponseEntity.
+        return ResponseEntity.noContent().build();
 
     }
 

@@ -18,16 +18,20 @@ public class Event {
     @Id
     @jakarta.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private LocalDateTime date;
+
     @Column(nullable = false)
     private Integer avaliableQuantity;
+
     @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToMany
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
 
     public Event(String name, LocalDateTime date, Integer avaliableQuantity, BigDecimal price, List<Ticket> tickets) {
@@ -70,10 +74,7 @@ public class Event {
         this.price = price;
     }
 
-    public void setId(Long id2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
-    }
+
 
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
